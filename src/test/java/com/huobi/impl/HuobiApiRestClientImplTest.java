@@ -5,6 +5,7 @@ import com.huobi.HuobiApiRestClient;
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
+import com.huobi.domain.market.MarketTicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,6 +28,13 @@ public class HuobiApiRestClientImplTest {
     @Test
     public void getMarketInfo_ShouldReturnMarketInfo() {
         Response<List<MarketInfo>> response = huobiApiRestClient.getMarketInfo();
+        assertNotNull(response);
+        assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() {
+        Response<List<MarketTicker>> response = huobiApiRestClient.getMarketTickers();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
     }

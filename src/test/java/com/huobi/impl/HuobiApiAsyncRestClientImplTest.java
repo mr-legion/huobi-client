@@ -5,6 +5,7 @@ import com.huobi.HuobiApiClientFactory;
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
+import com.huobi.domain.market.MarketTicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,6 +29,13 @@ public class HuobiApiAsyncRestClientImplTest {
     @Test
     public void getMarketInfo_ShouldReturnMarketInfo() throws ExecutionException, InterruptedException {
         Response<List<MarketInfo>> response = huobiApiAsyncRestClient.getMarketInfo().get();
+        assertNotNull(response);
+        assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() throws ExecutionException, InterruptedException {
+        Response<List<MarketTicker>> response = huobiApiAsyncRestClient.getMarketTickers().get();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
     }

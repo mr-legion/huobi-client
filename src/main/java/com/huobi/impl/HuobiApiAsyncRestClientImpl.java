@@ -4,6 +4,7 @@ import com.huobi.HuobiApiAsyncRestClient;
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
+import com.huobi.domain.market.MarketTicker;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,6 +35,13 @@ public class HuobiApiAsyncRestClientImpl implements HuobiApiAsyncRestClient {
     public CompletableFuture<Response<List<MarketInfo>>> getMarketInfo() {
         CompletableFuture<Response<List<MarketInfo>>> future = new CompletableFuture<>();
         huobiApiService.getMarketInfo().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    @Override
+    public CompletableFuture<Response<List<MarketTicker>>> getMarketTickers() {
+        CompletableFuture<Response<List<MarketTicker>>> future = new CompletableFuture<>();
+        huobiApiService.getMarketTickers().enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

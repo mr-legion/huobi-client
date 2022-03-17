@@ -4,6 +4,7 @@ import com.huobi.HuobiApiRestClient;
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
+import com.huobi.domain.market.MarketTicker;
 
 import java.util.List;
 
@@ -32,5 +33,10 @@ public class HuobiApiRestClientImpl implements HuobiApiRestClient {
     @Override
     public Response<List<MarketInfo>> getMarketInfo() {
         return executeSync(huobiApiService.getMarketInfo());
+    }
+
+    @Override
+    public Response<List<MarketTicker>> getMarketTickers() {
+        return executeSync(huobiApiService.getMarketTickers());
     }
 }
