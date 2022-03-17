@@ -14,5 +14,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> {
     private Integer code;
+    private String status;
     private T data;
 }

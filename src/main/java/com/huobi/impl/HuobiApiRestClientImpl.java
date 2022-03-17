@@ -3,6 +3,7 @@ package com.huobi.impl;
 import com.huobi.HuobiApiRestClient;
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
+import com.huobi.domain.market.MarketInfo;
 
 import java.util.List;
 
@@ -24,5 +25,12 @@ public class HuobiApiRestClientImpl implements HuobiApiRestClient {
     @Override
     public Response<List<Asset>> getAssets() {
         return executeSync(huobiApiService.getAssets());
+    }
+
+    // Market endpoints
+
+    @Override
+    public Response<List<MarketInfo>> getMarketInfo() {
+        return executeSync(huobiApiService.getMarketInfo());
     }
 }

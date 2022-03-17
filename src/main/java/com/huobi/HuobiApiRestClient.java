@@ -2,6 +2,7 @@ package com.huobi;
 
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
+import com.huobi.domain.market.MarketInfo;
 
 import java.util.List;
 
@@ -18,5 +19,14 @@ public interface HuobiApiRestClient {
      * @return assets
      */
     Response<List<Asset>> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get all supported markets.
+     *
+     * @return market info
+     */
+    Response<List<MarketInfo>> getMarketInfo();
 
 }

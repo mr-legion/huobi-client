@@ -2,6 +2,7 @@ package com.huobi.impl;
 
 import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
+import com.huobi.domain.market.MarketInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -16,5 +17,10 @@ public interface HuobiApiService {
 
     @GET("/v2/reference/currencies")
     Call<Response<List<Asset>>> getAssets();
+
+    // Market endpoints
+
+    @GET("/v1/common/symbols")
+    Call<Response<List<MarketInfo>>> getMarketInfo();
 
 }
