@@ -4,8 +4,10 @@ import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
 import com.huobi.domain.market.MarketTicker;
+import com.huobi.domain.market.OrderBookResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 import java.util.List;
 
@@ -26,5 +28,10 @@ public interface HuobiApiService {
 
     @GET("/market/tickers")
     Call<Response<List<MarketTicker>>> getMarketTickers();
+
+    @GET("/market/depth")
+    Call<OrderBookResponse> getOrderBook(@Query("symbol") String market,
+                                         @Query("depth") Integer limit,
+                                         @Query("type") String aggLevel);
 
 }

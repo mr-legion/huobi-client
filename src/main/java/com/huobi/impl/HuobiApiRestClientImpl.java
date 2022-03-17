@@ -5,6 +5,7 @@ import com.huobi.domain.Response;
 import com.huobi.domain.general.Asset;
 import com.huobi.domain.market.MarketInfo;
 import com.huobi.domain.market.MarketTicker;
+import com.huobi.domain.market.OrderBookResponse;
 
 import java.util.List;
 
@@ -38,5 +39,10 @@ public class HuobiApiRestClientImpl implements HuobiApiRestClient {
     @Override
     public Response<List<MarketTicker>> getMarketTickers() {
         return executeSync(huobiApiService.getMarketTickers());
+    }
+
+    @Override
+    public OrderBookResponse getOrderBook(String market, Integer limit, String aggLevel) {
+        return executeSync(huobiApiService.getOrderBook(market, limit, aggLevel));
     }
 }
