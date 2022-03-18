@@ -14,11 +14,21 @@ public class HuobiApiClientFactory {
     private final HuobiApiServiceGenerator serviceGenerator;
 
     public HuobiApiClientFactory() {
-        this(new OkHttpClient());
+        this.serviceGenerator = new HuobiApiServiceGenerator(new OkHttpClient());
     }
 
-    private HuobiApiClientFactory(OkHttpClient client) {
-        this.serviceGenerator = new HuobiApiServiceGenerator(client);
+    public HuobiApiClientFactory(ApiInteractionConfig apiInteractionConfig) {
+        this(new OkHttpClient(), apiInteractionConfig);
+    }
+
+    private HuobiApiClientFactory(OkHttpClient client, ApiInteractionConfig apiInteractionConfig) {
+        OkHttpClient newClient = client.newBuilder()
+                .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
+                .addInterceptor(new RateLimitInterceptor(
+                        apiInteractionConfig.getMaxRequestsPerSecond(),
+                        apiInteractionConfig.getMaxApiKeyUsagePerSecond()
+                )).build();
+        this.serviceGenerator = new HuobiApiServiceGenerator(newClient);
     }
 
     /**
