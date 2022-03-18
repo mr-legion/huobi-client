@@ -1,5 +1,7 @@
 package com.huobi.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huobi.HuobiApiError;
 import com.huobi.exception.HuobiApiException;
 import okhttp3.OkHttpClient;
@@ -20,11 +22,16 @@ import static com.huobi.constant.HuobiApiConstants.API_BASE_URL;
  */
 public class HuobiApiServiceGenerator {
 
-    private static final Converter.Factory converterFactory = JacksonConverterFactory.create();
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Converter.Factory converterFactory = JacksonConverterFactory.create(mapper);
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, HuobiApiError> errorBodyConverter =
             (Converter<ResponseBody, HuobiApiError>) converterFactory.responseBodyConverter(
                     HuobiApiError.class, new Annotation[0], null);
+
+    static {
+        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+    }
 
     private final OkHttpClient client;
 
