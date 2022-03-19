@@ -21,7 +21,7 @@ public class HuobiApiClientFactory {
         this(new OkHttpClient(), apiInteractionConfig);
     }
 
-    private HuobiApiClientFactory(OkHttpClient client, ApiInteractionConfig apiInteractionConfig) {
+    public HuobiApiClientFactory(OkHttpClient client, ApiInteractionConfig apiInteractionConfig) {
         OkHttpClient newClient = client.newBuilder()
                 .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
                 .addInterceptor(new RateLimitInterceptor(
